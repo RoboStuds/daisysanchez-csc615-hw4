@@ -30,16 +30,16 @@ int counter1 = 0;
 int counter2 = 0;
 
 //motor 1 pulse count
-void countmotor1
-{
-    counter1++;
-}
+//void countmotor1()
+//{
+//    counter1++;
+//}
 
 //motor 2 pulse count 
-void countermotor2
-{
-    counter2++;
-}
+//void countermotor2()
+//{
+//    counter2++;
+//}
 
 void forward()
 {
@@ -122,15 +122,15 @@ int main(void)
 
     while (var < 2)
     {
-        movingforward = forward();
+         forward();
 
         delay(5000);
 
-        movingbackwards = backward();
+         backward();
 
         delay(5000);
 
-        stopmoving = stop();
+         stop();
 
         var++;
         speed += 30;
