@@ -20,10 +20,10 @@
 #include <time.h>
 
 //code disk for speed encoder has 20 grids
-double grids = 20;
+//double grids = 20;
 
 //wheel diameter in millimeters
-double diameter = 66.10
+//double diameter =
 
 //pulse counters
 int counter1 = 0;
