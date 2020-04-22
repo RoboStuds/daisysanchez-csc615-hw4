@@ -19,27 +19,53 @@
 #include <softPwm.h>
 #include <time.h>
 
-//code disk for speed encoder has 20 grids
-//double grids = 20;
-
-//wheel diameter in millimeters
-//double diameter =
-
 //pulse counters
 int counter1 = 0;
 int counter2 = 0;
 
-//motor 1 pulse count
-//void countmotor1()
-//{
-//    counter1++;
-//}
+//code disk for speed encoder has 20 grids (slots)
+double grids = 20;
 
-//motor 2 pulse count 
-//void countermotor2()
-//{
-//    counter2++;
-//}
+//wheel diameter in millimeters
+//double diameter =
+
+//motor 1 pulse count
+void countmotor1()
+{
+    counter1++;
+}
+
+//motor 2 pulse count
+void countermotor2()
+{
+    counter2++;
+}
+
+void time()
+{
+    timer1.detachInterrupt();
+    Serial.print("Speed of motor1: ");
+    double rotation1 = (counter1 / grids) * 60.00;
+    Serial.print(rotation1);
+    Serial.print("Rotation per minute: ");
+    counter1 = 0;
+    Serial.print("Speed of motor2: ");
+    double rotation2 = (counter2 / grids) * 60.00;
+    Serial.print(rotation2);
+    Serial.print("Rotation per minute: ");
+    counter2 = 0;
+    timer1.detachInterupt();
+}
+
+void setup() 
+{
+  Serial.begin(9600);
+  
+  Timer1.initialize(1000000); // set timer for 1sec
+  attachInterrupt(digitalPinToInterrupt 1, countermotor1, RISING);  // Increase counter 1 when speed sensor pin goes High
+  attachInterrupt(digitalPinToInterrupt 7, countermotor2, RISING);  // Increase counter 2 when speed sensor pin goes High
+  Timer1.attachInterrupt(time); // Enable the timer
+}
 
 void forward()
 {
@@ -103,6 +129,12 @@ int main(void)
 
     wiringPiSetup();
 
+    //pin for encoder 1
+    pinMode(1, OUTPUT);
+
+    //pin for encoder 2
+    pinMode(7, OUTPUT);
+
     //Motor 1
     pinMode(0, OUTPUT);
     pinMode(2, OUTPUT);
@@ -122,15 +154,15 @@ int main(void)
 
     while (var < 2)
     {
-         forward();
+        forward();
 
         delay(5000);
 
-         backward();
+        backward();
 
         delay(5000);
 
-         stop();
+        stop();
 
         var++;
         speed += 30;
