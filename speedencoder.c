@@ -26,7 +26,7 @@ void loop()
     double total = 0;
     double RPS = 0;
 
-    int startime;
+    int starttime;
     int endtime;
 
     starttime = millis();
@@ -43,7 +43,7 @@ void loop()
         pulseold = pulse;
         RPS = (total / 20);
 
-        printf("Rev per seconds:", RPS);
+        printf("Rev per seconds: %f\n", RPS);
     }
 }
 
