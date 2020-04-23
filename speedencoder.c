@@ -19,7 +19,7 @@
 #include <softPwm.h>
 #include <time.h>
 
-void PI_THREAD(mythread)
+PI_THREAD(mythread)
 {
     int pulse = 0;
     double pulseold = 0;
