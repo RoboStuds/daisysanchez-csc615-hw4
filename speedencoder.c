@@ -21,21 +21,27 @@
 
 void loop()
 {
+    int pulse = 0;
+    double pulseold = 0;
+    double total = 0;
+    double RPS = 0;
+
     starttime = millis();
     endtime = starttime + 1000;
     while (millis() < endtime)
     {
-        if (digitalRead(1, INPUT))
+        if (digitalRead(1))
         {
             pulse = pulse + 1;
-            while (digitalRead(1, INPUT))
+            while (digitalRead(1))
+                ;
         }
-    }
-    total = pulse - pulseold;
-    pulseold = pulse;
-    RPS = (total / 20);
+        total = pulse - pulseold;
+        pulseold = pulse;
+        RPS = (total / 20);
 
-    printf("Rev per seconds:", RPS);
+        printf("Rev per seconds:", RPS);
+    }
 }
 
 void forward()
@@ -116,11 +122,6 @@ int main(void)
     pinMode(4, OUTPUT);
     pinMode(5, OUTPUT);
 
-    int pulse = 0;
-    double pulseold = 0;
-    double total = 0;
-    double RPS = 0;
-
     int speed = 10;
 
     softPwmCreate(0, speed, 100);
@@ -131,7 +132,7 @@ int main(void)
     while (var < 2)
     {
         loop();
-        
+
         forward();
 
         delay(5000);
