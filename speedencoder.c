@@ -19,7 +19,7 @@
 #include <softPwm.h>
 #include <time.h>
 
-PI_THREAD(mythread)
+void PI_THREAD(mythread)
 {
     int pulse = 0;
     double pulseold = 0;
@@ -33,10 +33,10 @@ PI_THREAD(mythread)
     endtime = starttime + 1000;
     while (millis() < endtime)
     {
-        if (digitalRead(8))
+        if (digitalRead(1))
         {
             pulse = pulse + 1;
-            while (digitalRead(8))
+            while (digitalRead(1))
                 ;
         }
         total = pulse - pulseold;
@@ -45,8 +45,6 @@ PI_THREAD(mythread)
 
         printf("Rev per seconds: %f\n", RPS);
     }
-    
-    return 0;
 }
 
 void forward()
@@ -112,7 +110,7 @@ int main(void)
     wiringPiSetup();
 
     //pin for encoder 1
-    pinMode(8, INPUT);
+    pinMode(1, INPUT);
 
     //pin for encoder 2
     //pinMode(7, INPUT);
@@ -127,7 +125,9 @@ int main(void)
     pinMode(4, OUTPUT);
     pinMode(5, OUTPUT);
 
-    int x = piThreadCreate(mythread);
+    x = piThreadCreate(mythread);
+    if (x != 0)
+        printf("didnt work");
 
     int speed = 10;
 
@@ -138,8 +138,6 @@ int main(void)
 
     while (var < 2)
     {
-        if (x != 0)
-        printf("didnt work");
 
         forward();
 
