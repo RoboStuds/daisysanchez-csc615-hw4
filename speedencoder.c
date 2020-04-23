@@ -24,7 +24,8 @@ PI_THREAD(mythread)
     int pulse = 0;
     double pulseold = 0;
     double total = 0;
-    double RPS = 0;
+    double speed = 0;
+    double radius = 1.25;
 
     int starttime;
     int endtime;
@@ -33,16 +34,16 @@ PI_THREAD(mythread)
         endtime = starttime + 1000;
         while (millis() < endtime)
         {
-            if (digitalRead(1))
+            if (digitalRead(8))
             {
                 pulse = pulse + 1;
-                while (digitalRead(1))
+                while (digitalRead(8))
                     ;
             }
         }
         total = pulse - pulseold;
         pulseold = pulse;
-        RPS = (total / 20);
+        speed = (2 * 3.14 * radius * total / 20);
 
         printf("Rev per seconds: %f\n", RPS);
     }
@@ -113,7 +114,7 @@ int main(void)
     wiringPiSetup();
 
     //pin for encoder 1
-    pinMode(1, INPUT);
+    pinMode(8, INPUT);
 
     //pin for encoder 2
     //pinMode(7, INPUT);
