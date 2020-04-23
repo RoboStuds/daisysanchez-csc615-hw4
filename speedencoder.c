@@ -24,7 +24,7 @@ PI_THREAD(mythread)
     int pulse = 0;
     double pulseold = 0;
     double total = 0;
-    double speed = 0;
+    double velocity = 0;
     double radius = 1.25;
 
     int starttime;
@@ -43,9 +43,9 @@ PI_THREAD(mythread)
         }
         total = pulse - pulseold;
         pulseold = pulse;
-        speed = (2 * 3.14 * radius * total / 20);
+        velocity = (2 * 3.14 * radius * total / 20);
 
-        printf("Rev per seconds: %f\n", RPS);
+        printf("Rev per seconds: %f\n", velocity);
     }
     return 0;
     
