@@ -28,16 +28,17 @@ void PI_THREAD(mythread)
 
     int starttime;
     int endtime;
-
-    starttime = millis();
-    endtime = starttime + 1000;
-    while (millis() < endtime)
-    {
-        if (digitalRead(1))
+    while(1) {
+        starttime = millis();
+        endtime = starttime + 1000;
+        while (millis() < endtime)
         {
-            pulse = pulse + 1;
-            while (digitalRead(1))
-                ;
+            if (digitalRead(1))
+            {
+                pulse = pulse + 1;
+                while (digitalRead(1))
+                    ;
+            }
         }
         total = pulse - pulseold;
         pulseold = pulse;
@@ -45,6 +46,8 @@ void PI_THREAD(mythread)
 
         printf("Rev per seconds: %f\n", RPS);
     }
+    return 0;
+    
 }
 
 void forward()
@@ -125,9 +128,9 @@ int main(void)
     pinMode(4, OUTPUT);
     pinMode(5, OUTPUT);
 
-    x = piThreadCreate(mythread);
+    int x = piThreadCreate(mythread);
     if (x != 0)
-        printf("didnt work");
+        printf("didnt work\n");
 
     int speed = 10;
 
