@@ -19,52 +19,23 @@
 #include <softPwm.h>
 #include <time.h>
 
-//pulse counters
-int counter1 = 0;
-int counter2 = 0;
-
-//code disk for speed encoder has 20 grids (slots)
-double grids = 20;
-
-//wheel diameter in millimeters
-//double diameter =
-
-//motor 1 pulse count
-void countmotor1()
+void loop()
 {
-    counter1++;
-}
+    starttime = millis();
+    endtime = starttime + 1000;
+    while (millis() < endtime)
+    {
+        if (digitalRead(1, INPUT))
+        {
+            pulse = pulse + 1;
+            while (digitalRead(1, INPUT))
+        }
+    }
+    total = pulse - pulseold;
+    pulseold = pulse;
+    RPS = (total / 20);
 
-//motor 2 pulse count
-void countermotor2()
-{
-    counter2++;
-}
-
-void time()
-{
-    timer1.detachInterrupt();
-    Serial.print("Speed of motor1: ");
-    double rotation1 = (counter1 / grids) * 60.00;
-    Serial.print(rotation1);
-    Serial.print("Rotation per minute: ");
-    counter1 = 0;
-    Serial.print("Speed of motor2: ");
-    double rotation2 = (counter2 / grids) * 60.00;
-    Serial.print(rotation2);
-    Serial.print("Rotation per minute: ");
-    counter2 = 0;
-    timer1.detachInterupt();
-}
-
-void setup() 
-{
-  Serial.begin(9600);
-  
-  Timer1.initialize(1000000); // set timer for 1sec
-  attachInterrupt(digitalPinToInterrupt 1, countermotor1, RISING);  // Increase counter 1 when speed sensor pin goes High
-  attachInterrupt(digitalPinToInterrupt 7, countermotor2, RISING);  // Increase counter 2 when speed sensor pin goes High
-  Timer1.attachInterrupt(time); // Enable the timer
+    printf("Rev per seconds:", RPS);
 }
 
 void forward()
@@ -130,10 +101,10 @@ int main(void)
     wiringPiSetup();
 
     //pin for encoder 1
-    pinMode(1, OUTPUT);
+    pinMode(1, INPUT);
 
     //pin for encoder 2
-    pinMode(7, OUTPUT);
+    //pinMode(7, INPUT);
 
     //Motor 1
     pinMode(0, OUTPUT);
@@ -145,6 +116,11 @@ int main(void)
     pinMode(4, OUTPUT);
     pinMode(5, OUTPUT);
 
+    int pulse = 0;
+    double pulseold = 0;
+    double total = 0;
+    double RPS = 0;
+
     int speed = 10;
 
     softPwmCreate(0, speed, 100);
@@ -154,6 +130,8 @@ int main(void)
 
     while (var < 2)
     {
+        loop();
+        
         forward();
 
         delay(5000);
