@@ -26,6 +26,9 @@ void loop()
     double total = 0;
     double RPS = 0;
 
+    int startime;
+    int endtime;
+
     starttime = millis();
     endtime = starttime + 1000;
     while (millis() < endtime)
