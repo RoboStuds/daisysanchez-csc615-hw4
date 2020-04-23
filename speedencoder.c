@@ -19,7 +19,7 @@
 #include <softPwm.h>
 #include <time.h>
 
-void loop()
+void PI_THREAD(mythread)
 {
     int pulse = 0;
     double pulseold = 0;
@@ -125,6 +125,8 @@ int main(void)
     pinMode(4, OUTPUT);
     pinMode(5, OUTPUT);
 
+    int piThreadCreate(mythread);
+
     int speed = 10;
 
     softPwmCreate(0, speed, 100);
@@ -134,7 +136,9 @@ int main(void)
 
     while (var < 2)
     {
-        loop();
+        x = piThreadCreate(mythread);
+        if (x != 0)
+        printf("didnt work");
 
         forward();
 
