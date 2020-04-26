@@ -53,8 +53,6 @@ PI_THREAD(mythread)
 
 void forward()
 {
-    //counter1 = 0;
-    //counter2 = 0;
 
     printf("Motor moving forward\n");
 
@@ -68,15 +66,10 @@ void forward()
     digitalWrite(4, HIGH);
     digitalWrite(5, LOW);
 
-    //while (){
-    //}
 }
 
 void backward()
 {
-
-    //counter1 = 0;
-    //counter2 = 0;
 
     printf("Motor moving backward\n");
 
@@ -90,8 +83,6 @@ void backward()
     digitalWrite(4, LOW);
     digitalWrite(5, HIGH);
 
-    //while(){
-    //}
 }
 
 void stop()
@@ -115,9 +106,6 @@ int main(void)
 
     //pin for encoder 1
     pinMode(8, INPUT);
-
-    //pin for encoder 2
-    //pinMode(7, INPUT);
 
     //Motor 1
     pinMode(0, OUTPUT);
