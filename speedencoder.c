@@ -10,8 +10,12 @@
 *
 * File: speedencoder.c
 *
-* Description: 
-*
+* Description: We connected two motors to two channels on the Motor Shield. Each motor will have a speed encoder wheel
+* and an infrared speed sensor. One of the speed sensors will be connected to the Raspberry Pi, the other will be 
+* connected to the LS7366R. We will read the speed encoder sensor by directly connecting the sensor to a digital 
+* pin on the Raspberry Pi and creating a multi-threaded application where the thread is responsible for reading 
+* that pin and providing a speed to the main program. The second motor will use the LS7366R to do the counting. 
+* The speed sensor is connected to the LS7366R and use the SPI interface to get the counts from the chip.
 *****************************************************************************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
