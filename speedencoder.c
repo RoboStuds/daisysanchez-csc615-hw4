@@ -29,6 +29,7 @@ PI_THREAD(mythread)
 
     int starttime;
     int endtime;
+
     while(1) {
         starttime = millis();
         endtime = starttime + 1000;
