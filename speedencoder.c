@@ -45,7 +45,7 @@ PI_THREAD(mythread)
         pulseold = pulse;
         velocity = (2 * 3.14 * radius * total / 20);
 
-        printf("Rev per seconds: %f\n", velocity);
+        printf("cm per seconds: %f\n", velocity);
     }
     return 0;
     
@@ -142,6 +142,7 @@ int main(void)
 
     while (var < 2)
     {
+        printf("PWM: %d\n", speed);
 
         forward();
 
