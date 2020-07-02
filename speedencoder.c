@@ -2,9 +2,9 @@
 * 
 * Class: CSC-615-01 Spring 2020
 *
-* Name: Daisy Sanchez
 *
-* Student ID: 912740223 
+*
+* 
 * 
 * Project: Assignment 4 – Motors & Speed Encoder
 *
